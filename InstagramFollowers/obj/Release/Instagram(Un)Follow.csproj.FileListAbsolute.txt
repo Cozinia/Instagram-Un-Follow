@@ -1,0 +1,13 @@
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\bin\Release\Instagram(Un)Follow.exe.config
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\bin\Release\Instagram(Un)Follow.exe
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\bin\Release\Instagram(Un)Follow.pdb
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\bin\Release\Newtonsoft.Json.dll
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\bin\Release\Newtonsoft.Json.xml
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.csproj.AssemblyReference.cache
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\InstagramUnfollow.Form1.resources
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\InstagramFollow.Properties.Resources.resources
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.csproj.GenerateResource.cache
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.csproj.CoreCompileInputs.cache
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.csproj.CopyComplete
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.exe
+C:\Users\Cozinia Motronu\Documents\Proiecte\C#\InstagramFollowers\InstagramFollowers\obj\Release\Instagram(Un)Follow.pdb
