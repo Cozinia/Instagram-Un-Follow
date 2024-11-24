@@ -87,7 +87,7 @@ Managing social media relationships, particularly on platforms like Instagram, i
 
 1. **Download or Clone the Project**:
    - You can either clone the repository or simply use the installer provided at this link:  
-     [Download Installer](https://drive.google.com/file/d/1PcyjcfN25S3UGq4axWq9vPYCPxu-K-Zk/view?usp=sharing)
+     [Download Installer](https://drive.google.com/file/d/1mueNMNuqGqPMRUPdTh_k5yREYJqkhWWL/view?usp=sharing)
 
 2. **Run the Application**:
    - If you chose to clone the repository, run the project from your development environment.
