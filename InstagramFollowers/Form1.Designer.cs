@@ -34,8 +34,8 @@
             this.labelFollowings = new System.Windows.Forms.Label();
             this.buttonUploadFollowers = new System.Windows.Forms.Button();
             this.buttonUploadFollowings = new System.Windows.Forms.Button();
-            this.labelPathToFollowers = new System.Windows.Forms.Label();
             this.labelPathToFollowings = new System.Windows.Forms.Label();
+            this.labelPathToFollowers = new System.Windows.Forms.Label();
             this.labelPeopleToUnfollow = new System.Windows.Forms.Label();
             this.labelSelectedFileFollowers = new System.Windows.Forms.Label();
             this.labelSelectedFollowers = new System.Windows.Forms.Label();
@@ -44,7 +44,13 @@
             this.groupBoxFollowers = new System.Windows.Forms.GroupBox();
             this.groupBoxFollowings = new System.Windows.Forms.GroupBox();
             this.groupBoxUnfollow = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.searchBox = new System.Windows.Forms.TextBox();
+            this.lblTotalCountValue = new System.Windows.Forms.Label();
+            this.lblTotalCount = new System.Windows.Forms.Label();
             this.dataGridViewPeopleToUnfollow = new System.Windows.Forms.DataGridView();
+            this.btnClearFilter = new System.Windows.Forms.Button();
             this.groupBoxFollowers.SuspendLayout();
             this.groupBoxFollowings.SuspendLayout();
             this.groupBoxUnfollow.SuspendLayout();
@@ -61,22 +67,22 @@
             this.labelFollowers.AutoSize = true;
             this.labelFollowers.Location = new System.Drawing.Point(6, 18);
             this.labelFollowers.Name = "labelFollowers";
-            this.labelFollowers.Size = new System.Drawing.Size(111, 16);
+            this.labelFollowers.Size = new System.Drawing.Size(117, 16);
             this.labelFollowers.TabIndex = 0;
-            this.labelFollowers.Text = "Upload followers:";
+            this.labelFollowers.Text = "Upload followings:";
             // 
             // labelFollowings
             // 
             this.labelFollowings.AutoSize = true;
             this.labelFollowings.Location = new System.Drawing.Point(6, 28);
             this.labelFollowings.Name = "labelFollowings";
-            this.labelFollowings.Size = new System.Drawing.Size(117, 16);
+            this.labelFollowings.Size = new System.Drawing.Size(111, 16);
             this.labelFollowings.TabIndex = 1;
-            this.labelFollowings.Text = "Upload followings:";
+            this.labelFollowings.Text = "Upload followers:";
             // 
             // buttonUploadFollowers
             // 
-            this.buttonUploadFollowers.Location = new System.Drawing.Point(278, 11);
+            this.buttonUploadFollowers.Location = new System.Drawing.Point(278, 21);
             this.buttonUploadFollowers.Name = "buttonUploadFollowers";
             this.buttonUploadFollowers.Size = new System.Drawing.Size(75, 23);
             this.buttonUploadFollowers.TabIndex = 2;
@@ -86,7 +92,7 @@
             // 
             // buttonUploadFollowings
             // 
-            this.buttonUploadFollowings.Location = new System.Drawing.Point(278, 25);
+            this.buttonUploadFollowings.Location = new System.Drawing.Point(278, 21);
             this.buttonUploadFollowings.Name = "buttonUploadFollowings";
             this.buttonUploadFollowings.Size = new System.Drawing.Size(75, 23);
             this.buttonUploadFollowings.TabIndex = 3;
@@ -94,21 +100,21 @@
             this.buttonUploadFollowings.UseVisualStyleBackColor = true;
             this.buttonUploadFollowings.Click += new System.EventHandler(this.buttonUploadFollowings_Click);
             // 
-            // labelPathToFollowers
-            // 
-            this.labelPathToFollowers.AutoSize = true;
-            this.labelPathToFollowers.Location = new System.Drawing.Point(96, 56);
-            this.labelPathToFollowers.Name = "labelPathToFollowers";
-            this.labelPathToFollowers.Size = new System.Drawing.Size(0, 16);
-            this.labelPathToFollowers.TabIndex = 4;
-            // 
             // labelPathToFollowings
             // 
             this.labelPathToFollowings.AutoSize = true;
-            this.labelPathToFollowings.Location = new System.Drawing.Point(96, 64);
+            this.labelPathToFollowings.Location = new System.Drawing.Point(96, 56);
             this.labelPathToFollowings.Name = "labelPathToFollowings";
             this.labelPathToFollowings.Size = new System.Drawing.Size(0, 16);
-            this.labelPathToFollowings.TabIndex = 5;
+            this.labelPathToFollowings.TabIndex = 4;
+            // 
+            // labelPathToFollowers
+            // 
+            this.labelPathToFollowers.AutoSize = true;
+            this.labelPathToFollowers.Location = new System.Drawing.Point(96, 64);
+            this.labelPathToFollowers.Name = "labelPathToFollowers";
+            this.labelPathToFollowers.Size = new System.Drawing.Size(0, 16);
+            this.labelPathToFollowers.TabIndex = 5;
             // 
             // labelPeopleToUnfollow
             // 
@@ -159,9 +165,9 @@
             // groupBoxFollowers
             // 
             this.groupBoxFollowers.Controls.Add(this.labelFollowers);
-            this.groupBoxFollowers.Controls.Add(this.buttonUploadFollowers);
+            this.groupBoxFollowers.Controls.Add(this.buttonUploadFollowings);
             this.groupBoxFollowers.Controls.Add(this.labelSelectedFileFollowers);
-            this.groupBoxFollowers.Controls.Add(this.labelPathToFollowers);
+            this.groupBoxFollowers.Controls.Add(this.labelPathToFollowings);
             this.groupBoxFollowers.Location = new System.Drawing.Point(12, 7);
             this.groupBoxFollowers.Name = "groupBoxFollowers";
             this.groupBoxFollowers.Size = new System.Drawing.Size(976, 83);
@@ -172,8 +178,8 @@
             // groupBoxFollowings
             // 
             this.groupBoxFollowings.Controls.Add(this.labelFollowings);
-            this.groupBoxFollowings.Controls.Add(this.buttonUploadFollowings);
-            this.groupBoxFollowings.Controls.Add(this.labelPathToFollowings);
+            this.groupBoxFollowings.Controls.Add(this.labelPathToFollowers);
+            this.groupBoxFollowings.Controls.Add(this.buttonUploadFollowers);
             this.groupBoxFollowings.Controls.Add(this.labelSelectedFollowers);
             this.groupBoxFollowings.Location = new System.Drawing.Point(12, 96);
             this.groupBoxFollowings.Name = "groupBoxFollowings";
@@ -184,16 +190,65 @@
             // 
             // groupBoxUnfollow
             // 
+            this.groupBoxUnfollow.Controls.Add(this.btnClearFilter);
+            this.groupBoxUnfollow.Controls.Add(this.btnSearch);
+            this.groupBoxUnfollow.Controls.Add(this.lblSearch);
+            this.groupBoxUnfollow.Controls.Add(this.searchBox);
+            this.groupBoxUnfollow.Controls.Add(this.lblTotalCountValue);
+            this.groupBoxUnfollow.Controls.Add(this.lblTotalCount);
             this.groupBoxUnfollow.Controls.Add(this.dataGridViewPeopleToUnfollow);
             this.groupBoxUnfollow.Controls.Add(this.labelPeopleToUnfollow);
             this.groupBoxUnfollow.Controls.Add(this.buttonUnfollowPeople);
             this.groupBoxUnfollow.Controls.Add(this.label1);
             this.groupBoxUnfollow.Location = new System.Drawing.Point(12, 202);
             this.groupBoxUnfollow.Name = "groupBoxUnfollow";
-            this.groupBoxUnfollow.Size = new System.Drawing.Size(976, 355);
+            this.groupBoxUnfollow.Size = new System.Drawing.Size(976, 378);
             this.groupBoxUnfollow.TabIndex = 14;
             this.groupBoxUnfollow.TabStop = false;
             this.groupBoxUnfollow.Text = "People who don\'t follow you back";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(733, 92);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(73, 26);
+            this.btnSearch.TabIndex = 17;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(585, 95);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(36, 16);
+            this.lblSearch.TabIndex = 16;
+            this.lblSearch.Text = "Find:";
+            // 
+            // searchBox
+            // 
+            this.searchBox.Location = new System.Drawing.Point(627, 92);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(100, 22);
+            this.searchBox.TabIndex = 15;
+            // 
+            // lblTotalCountValue
+            // 
+            this.lblTotalCountValue.AutoSize = true;
+            this.lblTotalCountValue.Location = new System.Drawing.Point(870, 340);
+            this.lblTotalCountValue.Name = "lblTotalCountValue";
+            this.lblTotalCountValue.Size = new System.Drawing.Size(0, 16);
+            this.lblTotalCountValue.TabIndex = 14;
+            // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.AutoSize = true;
+            this.lblTotalCount.Location = new System.Drawing.Point(768, 340);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(76, 16);
+            this.lblTotalCount.TabIndex = 13;
+            this.lblTotalCount.Text = "Total count:";
             // 
             // dataGridViewPeopleToUnfollow
             // 
@@ -205,11 +260,21 @@
             this.dataGridViewPeopleToUnfollow.Size = new System.Drawing.Size(881, 217);
             this.dataGridViewPeopleToUnfollow.TabIndex = 12;
             // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Location = new System.Drawing.Point(813, 92);
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.Size = new System.Drawing.Size(75, 25);
+            this.btnClearFilter.TabIndex = 18;
+            this.btnClearFilter.Text = "Clear";
+            this.btnClearFilter.UseVisualStyleBackColor = true;
+            this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 581);
+            this.ClientSize = new System.Drawing.Size(1001, 601);
             this.Controls.Add(this.groupBoxUnfollow);
             this.Controls.Add(this.groupBoxFollowings);
             this.Controls.Add(this.groupBoxFollowers);
@@ -234,8 +299,8 @@
         private System.Windows.Forms.Label labelFollowings;
         private System.Windows.Forms.Button buttonUploadFollowers;
         private System.Windows.Forms.Button buttonUploadFollowings;
-        private System.Windows.Forms.Label labelPathToFollowers;
         private System.Windows.Forms.Label labelPathToFollowings;
+        private System.Windows.Forms.Label labelPathToFollowers;
         private System.Windows.Forms.Label labelPeopleToUnfollow;
         private System.Windows.Forms.Label labelSelectedFileFollowers;
         private System.Windows.Forms.Label labelSelectedFollowers;
@@ -245,6 +310,12 @@
         private System.Windows.Forms.GroupBox groupBoxFollowings;
         private System.Windows.Forms.GroupBox groupBoxUnfollow;
         private System.Windows.Forms.DataGridView dataGridViewPeopleToUnfollow;
+        private System.Windows.Forms.Label lblTotalCountValue;
+        private System.Windows.Forms.Label lblTotalCount;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.Button btnClearFilter;
     }
 }
 

@@ -16,13 +16,14 @@ namespace InstagramUnfollow
     {
         private List<string> followers { get; set; }
         private List<string> followings { get; set; }
+        private List<string> peopleToUnfollow = new List<string>();
+        private int totalCountOfUnfollowers = 0;
         private DataTable dataTablePeopleToUnfollow = new DataTable();
         public Form1()
         {
             InitializeComponent();
 
-            // Add columns to the DataTable
-            dataTablePeopleToUnfollow.Columns.Add("ID", typeof(int));
+            // Add columns to the 
             dataTablePeopleToUnfollow.Columns.Add("Username", typeof(string));
             dataTablePeopleToUnfollow.Columns.Add("Profile Link", typeof(string));
 
@@ -46,7 +47,7 @@ namespace InstagramUnfollow
             {
                 filePath = openFileDialog.FileName;
 
-                labelPathToFollowers.Text = filePath;
+                labelPathToFollowers.Text = filePath; // Update the correct label
             }
 
             if (!string.IsNullOrEmpty(filePath))
@@ -55,12 +56,10 @@ namespace InstagramUnfollow
                 {
                     string jsonContent = System.IO.File.ReadAllText(filePath);
                     HandleJSONContent handleJSONContent = new HandleJSONContent(jsonContent);
-                    followers = handleJSONContent.getFollowersList();
-
+                    followers = handleJSONContent.getFollowersList(); // Correct method call
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show("Error reading the file: " + ex.Message);
                 }
             }
@@ -79,7 +78,7 @@ namespace InstagramUnfollow
             {
                 filePath = openFileDialog.FileName;
 
-                labelPathToFollowings.Text = filePath;
+                labelPathToFollowings.Text = filePath; // Update the correct label
             }
 
             if (!string.IsNullOrEmpty(filePath))
@@ -87,13 +86,11 @@ namespace InstagramUnfollow
                 try
                 {
                     string jsonContent = System.IO.File.ReadAllText(filePath);
-                   HandleJSONContent handleJSONContent = new HandleJSONContent(jsonContent);
-                    followings = handleJSONContent.getFollowingsList();
-                   
+                    HandleJSONContent handleJSONContent = new HandleJSONContent(jsonContent);
+                    followings = handleJSONContent.getFollowingsList(); // Correct method call
                 }
                 catch (Exception ex)
                 {
-
                     MessageBox.Show("Error reading the file: " + ex.Message);
                 }
             }
@@ -103,52 +100,102 @@ namespace InstagramUnfollow
             }
         }
 
+
         private void buttonUnfollowPeople_Click(object sender, EventArgs e)
         {
-           
+            totalCountOfUnfollowers = 0;
             followers.Sort();
             followings.Sort();
-            int id = 0;
-            // optimize lookup
-            HashSet<string> followersSet = new HashSet<string>(followers);
 
             
-            StringBuilder peopleToUnfollow = new StringBuilder();
+            HashSet<string> followersSet = new HashSet<string>(followers);
+
+          
+            peopleToUnfollow.Clear();
+            dataTablePeopleToUnfollow.Rows.Clear();
 
            
             foreach (var following in followings)
             {
                 if (!followersSet.Contains(following))
                 {
-                    id++;
-                    string profileLink = $"http://instagram.com/{following}";
-                    dataTablePeopleToUnfollow.Rows.Add(id, following, profileLink); 
-                    
+                    totalCountOfUnfollowers += 1;
+                    peopleToUnfollow.Add(following); 
+
+                    string profileLink = $"https://instagram.com/{following}";
+                    dataTablePeopleToUnfollow.Rows.Add(following, profileLink); 
                 }
             }
 
-            //Load this every time changes have been made regarding uploading a new file
+            // Update UI elements
+            lblTotalCountValue.Text = totalCountOfUnfollowers.ToString();
             dataGridViewPeopleToUnfollow.DataSource = dataTablePeopleToUnfollow;
         }
 
         private void DataGridViewPeopleToUnfollow_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (e.ColumnIndex == 2) 
+            if (dataGridViewPeopleToUnfollow.Columns[e.ColumnIndex].Name == "Profile Link")
             {
-               
                 string url = dataGridViewPeopleToUnfollow.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
 
-                
                 try
                 {
-                    Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+                    string targetUrl = $"{url}";
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = targetUrl,
+                        UseShellExecute = true 
+                    });
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Unable to open link: " + ex.Message);
                 }
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            String userToFind = searchBox.Text;
+            totalCountOfUnfollowers = 0;
+            // Check if there are any users to search
+            if (peopleToUnfollow == null || peopleToUnfollow.Count == 0)
+            {
+                MessageBox.Show("No users available to search. Please generate the list first.");
+                return;
+            }
+
+            dataGridViewPeopleToUnfollow.DataSource = null;
+            dataTablePeopleToUnfollow.Rows.Clear();
+
+            foreach (var person in peopleToUnfollow)
+            {
+                if (person.IndexOf(userToFind, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    string profileLink = $"https://instagram.com/{person}";
+                    dataTablePeopleToUnfollow.Rows.Add(person, profileLink);
+                    totalCountOfUnfollowers++;
+                }
+            }
+
+            dataGridViewPeopleToUnfollow.DataSource = dataTablePeopleToUnfollow;
+
+            dataGridViewPeopleToUnfollow.Columns["Username"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridViewPeopleToUnfollow.Columns["Profile Link"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            lblTotalCountValue.Text = totalCountOfUnfollowers.ToString();
+
+            if (dataTablePeopleToUnfollow.Rows.Count == 0)
+            {
+                MessageBox.Show("No matches found for the entered username.");
+            }
+        }
+
+        private void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            buttonUnfollowPeople_Click(sender, e);
+            searchBox.Text = string.Empty;
         }
     }
 }
